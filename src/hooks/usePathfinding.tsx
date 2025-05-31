@@ -4,7 +4,7 @@ import { PathfindingContext } from "../context/PathfindingContext"
 export const usePathfinding = () => {
     const pathFindingContext = useContext(PathfindingContext);
 
-    if(!pathFindingContext){
+    if (!pathFindingContext) {
         throw new Error("usePathfinding must be used within a PathfindingProvider");
     }
 
