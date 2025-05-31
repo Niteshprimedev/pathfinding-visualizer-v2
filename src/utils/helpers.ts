@@ -2,7 +2,7 @@ import { type TileType, type GridType } from "./types"
 import { MAX_ROWS, MAX_COLS } from "./constants"
 
 const createRow = (row: number, startTile: TileType, endTile: TileType) => {
-    const currentRow: array = [];
+    const currentRow = [];
     for (let col = 0; col <= MAX_COLS; col++) {
         currentRow.push({
             row,
