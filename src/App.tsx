@@ -1,6 +1,7 @@
 import { PathfindingProvider } from "./context/PathfindingContext"
 import { TileProvider } from "./context/TileContext"
 import { SpeedProvider } from "./context/SpeedContext"
+import Grid from './components/Grid';
 
 function App() {
 
@@ -8,9 +9,9 @@ function App() {
     <PathfindingProvider>
       <TileProvider>
         <SpeedProvider>
-          <h1 className="text-3xl font-bold underline h-screen w-screen bg-blue-500">
-            Building Path Finding Visualizer!
-          </h1>
+          <div className="h-screen w-screen flex flex-col">
+            <Grid></Grid>
+          </div>
         </SpeedProvider>
       </TileProvider>
     </PathfindingProvider>
