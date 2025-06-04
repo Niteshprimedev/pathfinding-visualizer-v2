@@ -2,6 +2,8 @@
 ## PROJECT REF:
 [Google_Engineer](https://clementmihailescu.github.io/Pathfinding-Visualizer/#)
 
+## [Project_TUTORIAL](https://youtu.be/fLpvgCVYjTo)
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
