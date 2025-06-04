@@ -43,3 +43,7 @@ export const createNewGrid = (grid: GridType, row: number, col: number) => {
     newGrid[row][col] = newTile;
     return newGrid;
 }
+
+export const isEqual = (startTile: TileType, tile: TileType) => {
+    return startTile.row === tile.row && startTile.col === tile.col;
+}

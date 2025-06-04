@@ -2,14 +2,18 @@ import Select from './Select';
 import { MAZES } from '../utils/constants';
 import { usePathfinding } from '../hooks/usePathfinding';
 import type { MazeType } from '../utils/types';
+import { resetGrid } from '../utils/resetGrid';
+import { useTile } from '../hooks/useTile';
 
 function Nav() {
-    const { maze, setMaze } = usePathfinding();
+    const { maze, setMaze, grid } = usePathfinding();
+    const { startTile, endTile } = useTile();
 
     const handleGenerateMaze = (maze: MazeType) => {
         if (maze === "NONE") {
             setMaze(maze);
-            // reset grid;
+            resetGrid({ grid, startTile, endTile });
+            return;
         }
     }
     return (
@@ -23,7 +27,7 @@ function Nav() {
                         value={maze}
                         label='Maze'
                         options={MAZES}
-                        onChange={(e) => { }}
+                        onChange={(e) => { handleGenerateMaze(e.target.value as MazeType) }}
                         isDisabled={false}
                     ></Select>
                 </div>
