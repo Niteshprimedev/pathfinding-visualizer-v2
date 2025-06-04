@@ -3,7 +3,7 @@ import { TileContext } from "../context/TileContext";
 
 export const useTile = () => {
     const tileContext = useContext(TileContext);
-    if(!tileContext){
+    if (!tileContext) {
         throw Error("useTile must be used within a TileContext")
     }
     return tileContext;
