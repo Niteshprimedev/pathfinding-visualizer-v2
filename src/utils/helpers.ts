@@ -63,7 +63,7 @@ export const isRightBottomTileExists = async (grid: GridType, row: number, col: 
     await sleepTimer(20 * SPEEDS.find((s) => s.value === speed)!.value - 5);
 }
 
-export const getRandInt = (min: number, max: number) =>{
+export const getRandInt = (min: number, max: number) => {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);

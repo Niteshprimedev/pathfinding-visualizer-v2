@@ -29,6 +29,7 @@ export function Tile({
     handleMouseEnter: MouseFunction
 }) {
     let tileTyleStyle;
+    console.log(row, col);
 
     if (isStart) {
         tileTyleStyle = START_TILE_STYLE;
@@ -59,7 +60,6 @@ export function Tile({
             onMouseUp={() => handleMouseUp(row, col)}
             onMouseEnter={() => handleMouseEnter(row, col)}
         >
-
         </div>
     )
 }

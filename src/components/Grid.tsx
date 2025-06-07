@@ -16,6 +16,7 @@ function Grid({ isVisualizationRunningRef }: { isVisualizationRunningRef: RefObj
 
         setIsMouseDown(true);
         const newGrid = createNewGrid(grid, row, col);
+        console.log("New Grid", newGrid);
         setGrid(newGrid);
     }
 

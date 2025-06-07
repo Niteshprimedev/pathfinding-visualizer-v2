@@ -5,13 +5,17 @@ import type { MazeType } from '../utils/types';
 import { resetGrid } from '../utils/resetGrid';
 import { useTile } from '../hooks/useTile';
 import { useState } from 'react';
+import { runMazeAlgorithm } from '../utils/runMazeAlgorithm';
+import { useSpeed } from '../hooks/useSpeed';
 
 function Nav() {
     const [isDisabled, setIsDisabled] = useState(false);
-    const { maze, setMaze, grid } = usePathfinding();
+    const { maze, setMaze, grid, setGrid, setIsGraphVisualized } = usePathfinding();
     const { startTile, endTile } = useTile();
+    const { speed } = useSpeed();
 
     const handleGenerateMaze = (maze: MazeType) => {
+        console.log(maze, 'Handle Maze Component Clicked');
         if (maze === "NONE") {
             setMaze(maze);
             resetGrid({ grid, startTile, endTile });
@@ -20,8 +24,20 @@ function Nav() {
 
         setMaze(maze);
         setIsDisabled(true);
-        // runMazeAlgorithm(maze) function;
+        runMazeAlgorithm({
+            maze,
+            grid, 
+            startTile,
+            endTile,
+            setIsDisabled,
+            speed,
+        });
+        const newGrid = grid.slice();
+        setGrid(newGrid);
+        setIsGraphVisualized(false);
     }
+    let count = 0;
+    console.log("Nav component Rendered", count++);
     return (
         <div className='flex items-center justify-center min-h-[4.5rem] border-b shadow-gray-600 sm:px-5 px-0'>
             <div className='flex items-center lg:justify-between justify-center w-full sm:w-[52rem]'>
