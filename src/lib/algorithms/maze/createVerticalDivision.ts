@@ -3,7 +3,7 @@ import { getRandInt, isEqual, sleepTimer } from "../../../utils/helpers";
 import type { GridType, SpeedType, TileType } from "../../../utils/types";
 import runRecursiveDivision from "./runRecursiveDivision";
 
-export async function createHorizontalDivision({
+export async function createVerticalDivision({
     grid,
     startTile,
     endTile,
@@ -24,29 +24,26 @@ export async function createHorizontalDivision({
     setIsDisabled: (isDisabled: boolean) => void,
     speed: SpeedType,
 }) {
-    const makeWallAt = row + getRandInt(0, height - 1) * 2 + 1;
-    const makePassageAt = col + getRandInt(0, width) * 2;
+    const makeWallAt = col + getRandInt(0, width - 1) * 2 + 1;
+    const makePassageAt = row + getRandInt(0, height) * 2;
 
-    for (let idxI = 0; idxI < (2 * width - 1); idxI++) {
-        if (makePassageAt !== col + idxI) {
-            if (!isEqual(grid[makeWallAt][col + idxI], startTile) && !isEqual(grid[makeWallAt][col + idxI], endTile)) {
-                grid[makeWallAt][col + idxI].isWall = true;
-
-                document.getElementById(`${makeWallAt}-${col + idxI}`)!.className = `${WALL_TILE_STYLE} animate-wall`;
-                await sleepTimer(10 * SPEEDS.find((s) => s.value === speed)!.value - 5);
+    for (let idxI = 0; idxI < (2 * height - 1); idxI++) {
+        if (makePassageAt !== row + idxI) {
+            if (!isEqual(grid[row + idxI][makeWallAt], startTile) && !isEqual(grid[row + idxI][makeWallAt], endTile)) {
+                document.getElementById(`${row + idxI}-${makeWallAt}`)!.className = `${WALL_TILE_STYLE} animate-wall`;
+                await sleepTimer(10 * SPEEDS.find((s) => s.value === speed)!.value - 5)
             }
         }
     }
 
-    // Recursively Divide the divisions above and below the cells;
     await runRecursiveDivision({
         grid,
         startTile,
         endTile,
         row,
         col,
-        height: (makeWallAt - row + 1) / 2,
-        width,
+        height,
+        width: (makeWallAt - col + 1) / 2,
         setIsDisabled,
         speed
     });
@@ -55,12 +52,13 @@ export async function createHorizontalDivision({
         grid,
         startTile,
         endTile,
-        row: makeWallAt + 1,
-        col,
-        height: height - (makeWallAt - row + 1) / 2,
-        width,
+        row,
+        col: makeWallAt + 1,
+        height,
+        width: width - (makeWallAt - col + 1) / 2,
         setIsDisabled,
-        speed
-    });
+        speed,
+    })
+
     return null;
 }
