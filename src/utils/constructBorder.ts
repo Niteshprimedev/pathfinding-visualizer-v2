@@ -7,6 +7,7 @@ export async function constructBorder(
     startTile: TileType,
     endTile: TileType
 ) {
+    // Right, Bottom, Left and Top;
     const directions = [
         { row: 0, col: 1 },
         { row: 1, col: 0 },
@@ -35,6 +36,7 @@ export async function constructBorder(
             }
         }
 
+        // correct the positions for next direction;
         if (row < 0) row = 0;
         if (row >= MAX_ROWS) row = MAX_ROWS - 1;
         if (col < 0) col = 0;

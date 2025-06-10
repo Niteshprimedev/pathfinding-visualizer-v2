@@ -1,4 +1,4 @@
-import type { MazeSelectType, SpeedSelectType, GraphSelectType } from "./types";
+import type { MazeSelectType, SpeedSelectType, AlgorithmSelectType } from "./types";
 
 export const MAX_ROWS = 39;
 export const MAX_COLS = 49;
@@ -47,11 +47,11 @@ export const SPEEDS: SpeedSelectType[] = [
     { name: "Fast", value: 0.5 },
 ]
 
-export const GRAPHS: GraphSelectType[] = [
+export const PATHFINDING_ALGORITHMS: AlgorithmSelectType[] = [
     { name: "Dijsktras", value: "DIJKSTRA" },
-    { name: "A Star", value: "A_STAR" },
-    { name: "Breadth First Search", value: "BFS" },
+    { name: "A-Star", value: "A_STAR" },
+    { name: "Breath First Search", value: "BFS" },
     { name: "Depth First Search", value: "DFS" },
-]   
+]
 
 export const SLEEP_TIME = 8;
