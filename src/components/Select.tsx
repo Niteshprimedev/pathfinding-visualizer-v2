@@ -14,7 +14,7 @@ function Select({
     isDisabled: boolean;
 
 }) {
-    console.log('Select Component', { value, label, onChange, options, isDisabled });
+    // console.log('Select Component', { value, label, onChange, options, isDisabled });
 
     return (
         <div className='flex flex-col items-start gap-1'>

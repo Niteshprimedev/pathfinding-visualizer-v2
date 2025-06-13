@@ -1,16 +1,17 @@
 import Select from './Select';
 import PlayButton from '../components/PlayButton'
-import { MAZES, PATHFINDING_ALGORITHMS } from '../utils/constants';
+import { EXTENDED_SLEEP_TIME, MAZES, PATHFINDING_ALGORITHMS, SLEEP_TIME, SPEEDS } from '../utils/constants';
 import { usePathfinding } from '../hooks/usePathfinding';
 import type { AlgorithmType, MazeType } from '../utils/types';
 import { resetGrid } from '../utils/resetGrid';
 import { useTile } from '../hooks/useTile';
-import { useState } from 'react';
+import { useState, RefObject } from 'react';
 import { runMazeAlgorithm } from '../utils/runMazeAlgorithms';
 import { useSpeed } from '../hooks/useSpeed';
 import { runPathFindingAlgorithms } from '../utils/runPathFindingAlgorithms';
+import { animatePath } from '../utils/animatePath';
 
-function Nav() {
+function Nav({ isVisualizationRunningRef }: { isVisualizationRunningRef: RefObject<boolean> }) {
     const [isDisabled, setIsDisabled] = useState(false);
     const { maze, setMaze, grid, setGrid, isGraphVisualized, setIsGraphVisualized, algorithm, setAlgorithm } = usePathfinding();
     const { startTile, endTile } = useTile();
@@ -54,11 +55,21 @@ function Nav() {
             endTile
         });
 
-        console.log(traversedTiles, path);
+        animatePath(traversedTiles, path, startTile, endTile, speed);
+        setIsDisabled(true);
+        isVisualizationRunningRef.current = true;
+        setTimeout(() => {
+            const newGrid = grid.slice();
+            setGrid(newGrid);
+            setIsGraphVisualized(true);
+            setIsDisabled(false);
+            isVisualizationRunningRef.current = false;
+        }, (SLEEP_TIME * (traversedTiles.length + SLEEP_TIME * 2) + EXTENDED_SLEEP_TIME * (path.length + 60) * SPEEDS.find((s) => s.value === speed)!.value));
+        // console.log(traversedTiles, path);
     }
 
     let count = 0;
-    console.log("Nav component Rendered", count++);
+    // console.log("Nav component Rendered", count++);
     return (
         <div className='flex items-center justify-center min-h-[4.5rem] border-b shadow-gray-600 sm:px-5 px-0'>
             <div className='flex items-center lg:justify-between justify-center w-full sm:w-[52rem]'>

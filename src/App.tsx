@@ -13,7 +13,7 @@ function App() {
       <TileProvider>
         <SpeedProvider>
           <div className="h-screen w-screen flex flex-col">
-            <Nav></Nav>
+            <Nav isVisualizationRunningRef={isVisualizationRunningRef}></Nav>
             <Grid isVisualizationRunningRef={isVisualizationRunningRef}></Grid>
           </div>
         </SpeedProvider>
