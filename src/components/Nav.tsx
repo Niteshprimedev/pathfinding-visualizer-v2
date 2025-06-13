@@ -8,6 +8,7 @@ import { useTile } from '../hooks/useTile';
 import { useState } from 'react';
 import { runMazeAlgorithm } from '../utils/runMazeAlgorithms';
 import { useSpeed } from '../hooks/useSpeed';
+import { runPathFindingAlgorithms } from '../utils/runPathFindingAlgorithms';
 
 function Nav() {
     const [isDisabled, setIsDisabled] = useState(false);
@@ -46,6 +47,14 @@ function Nav() {
         }
 
         // run the algorithm;
+        const { traversedTiles, path } = runPathFindingAlgorithms({
+            algorithm,
+            grid,
+            startTile,
+            endTile
+        });
+
+        console.log(traversedTiles, path);
     }
 
     let count = 0;
@@ -74,7 +83,7 @@ function Nav() {
                     <PlayButton
                         isDisabled={isDisabled}
                         isGraphVisualized={isGraphVisualized}
-                        handleRunVisualizer={() => { }}
+                        handleRunVisualizer={handleRunVisualizer}
                     ></PlayButton>
                 </div>
             </div>
