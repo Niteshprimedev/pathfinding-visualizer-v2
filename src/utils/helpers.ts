@@ -68,3 +68,12 @@ export const getRandInt = (min: number, max: number) => {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
 }
+
+export const dropFromQueue = (tile: TileType, queue: TileType[]) => {
+    for(let idxI = 0; idxI < queue.length; idxI++){
+        if(isEqual(tile, queue[idxI])){
+            queue = queue.splice(idxI, 1);
+            break;
+        }
+    }
+}
